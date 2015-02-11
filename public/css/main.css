@@ -1,0 +1,94 @@
+@charset "UTF-8";
+* {margin: 0;padding: 0;}
+html,body {height: 100%;background: #f4f4f4;font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif}
+a {text-decoration: none;color: #5d5d5d;}
+a:hover {color: #f4726d;}
+h1 {font-size: 24px;}
+h2 {font-size: 22px;}
+h3 {font-size: 20px;}
+h4 {font-size: 18px;}
+h5 {font-size: 16px;}
+h6 {font-size: 12px;}
+.left {float: left;}
+.right {float: right;}
+.text-left {text-align: left;}
+.text-right {text-align: right;}
+.text-center {text-align: center;}
+input:focus {border: none;}
+.disable {display: none;}
+.block {display: block;}
+blockquote {background: #f6f6f6;border-left: 3px solid #f4726d;padding: 10px 15px;margin: 5px 0px;}
+pre code {margin: 5px 0px;padding: 10px 20px;display: inherit;font-size: 12px;line-height: 18px;background: #e6e6e6;font-family: Consolas, "Lucida Console", monospace;}
+p {line-height: 28px}
+#preview {width: 100%;height: auto;}
+#header {width: 100%;height: 50px;background: #f4726d;position: fixed;top: 0;z-index: 99;line-height: 45px;}
+#nav {margin: 0 auto;width: 80%;}
+#nav #profile ul {list-style-type: none;}
+#nav #profile ul li {float: left;margin: 0 2px 0 8px}
+#nav #profile ul li,#nav #profile ul li a {font-size: 13px;line-height: 50px;color: #ffffff;}
+#container {margin: 0 auto;border: 1px solid #e6e6e6;border-radius: 5px;width: 80%;background: #ffffff; position: relative;top: 60px;line-height: 28px;}
+#register {margin: 10% auto;width: 40%;}
+#post-list {padding: 0 30px;}
+#container #post-form .field textarea.textarea {height: 800px;font-family: monospace,monospace}
+.post-header {margin: 20px 0 10px;border-bottom: 1px solid #e6e6e6;}
+.post-header .post-tag {
+    width: 100%;
+    height: 30px;
+    font-size: 12px;
+    line-height: 30px;
+}
+.post-header .post-date {
+    position: absolute;
+    right: 35px;
+    font-size: 12px;
+}
+.post-content {
+    color: #5e5e5e;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.post-content code {
+    background: #f6f6f6;
+    display: inline-block;
+}
+.post-content pre code {
+    display: block;
+}
+.post-content a {
+    color: #5699bb;
+}
+#footer {
+    margin: 100px;
+}
+#fixed-right-tools .background-icon {
+    background-size: 70px 70px;
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    position: fixed;
+    right: 20px;
+}
+#new-post {
+    z-index: 100;
+    bottom: 20px;
+    background: url('../img/new-post.png') no-repeat;
+}
+@media (max-width:768px ) {
+    #container {
+        width: 100%;
+        border-radius: 0;
+        top: 50px;
+    }
+    #fixed-right-tools .background-icon {
+        width: 60px;
+        height: 60px;
+        background-size: 60px 60px;
+    }
+    #register {
+        margin: 40% auto;
+        width: 100%;
+    }
+    #container .viewer {
+        display: none;
+    }
+}
