@@ -1,16 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Penser
- * Date: 15-2-10
- * Time: 下午10:35
- */
 namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Validator;
 
+/**
+ * 文章操作服务
+ * @author 温旭峰
+ * @version 1.0
+ */
 class Post {
 
     public static function validator(array $data){
@@ -21,9 +20,20 @@ class Post {
     }
 
     /**
-     * @brief 添加文章
-     * @param array $data
-     * @return mixed
+     * 添加文章，返回新增文章ID
+     *
+     * [php]
+     * $data = [
+     *     'title' => '文章标题',
+     *     'content' => '文章内容',
+     *     'commentStatus' => 'on',
+     *     'isPage' => 'on',
+     * ]
+     * $postId = Post::create($data);
+     *
+     * @param array $data 文章数据
+     * @return integer postId 新增文章的ID
+     * @version 1.0
      */
     public static function create(array $data){
         //添加一篇文章insert into post;获取post_id
@@ -64,8 +74,8 @@ class Post {
 
     /**
      * @brief 获取文章详情
-     * @param $id
-     * @return mixed
+     * @param interger $id 文章ID
+     * @return mixed 文章详情
      */
     public static function show($id){
         $postDetail = DB::table('posts')->where('post_id',intval($id))

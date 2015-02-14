@@ -1,7 +1,7 @@
-@extends('index')
+@extends('manage/index')
 
-@section('content')
-<div id="container">
-    this is the website setting page!
-</div>
+@section('manage-main')
+    <div id="manage-main">
+        this is manage main blade setting!
+    </div>
 @endsection

@@ -37,7 +37,7 @@
             <ul>
                 <li><span>{{ Auth::user()->name }}</span></li>
                 @if( Auth::user()->level >= 99)
-                <li><a href="/management">管理</a></li>
+                <li><a href="/manage">管理</a></li>
                 @endif
                 <li><a href="/auth/logout">退出</a></li>
             </ul>
@@ -48,6 +48,7 @@
 @yield('content')
 <div id="footer" class="text-center">
     <span class="copyright">&copy; 2014 Laravel-blog</span>
+    &nbsp;&nbsp; <a href="/doc/index.html">API</a>
 </div>
 
 @if (Route::current()->getUri() == 'post/create')

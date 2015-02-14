@@ -73,6 +73,18 @@ p {line-height: 28px}
     bottom: 20px;
     background: url('../img/new-post.png') no-repeat;
 }
+
+
+/**
+ * manage
+ */
+#manage-container {
+    margin: 20px;
+}
+#manage-sidebar {
+    width: 20%;
+}
+
 @media (max-width:768px ) {
     #container {
         width: 100%;
