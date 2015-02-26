@@ -50,14 +50,5 @@
     <span class="copyright">&copy; 2014 Laravel-blog</span>
     &nbsp;&nbsp; <a href="/doc/index.html">API</a>
 </div>
-
-@if (Route::current()->getUri() == 'post/create')
-<div id="fixed-right-tools" style="display:none">
-@endif
-<div id="fixed-right-tools">
-    @if (!Auth::guest() && Auth::user()->level >= 9)
-    <a id="new-post" class="background-icon" href="/post/create"></a>
-    @endif
-</div>
 </body>
 </html>

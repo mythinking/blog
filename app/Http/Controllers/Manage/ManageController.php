@@ -24,4 +24,8 @@ class ManageController extends Controller {
     public function setting(){
         return view('manage/setting');
     }
+
+    public function posts(){
+        return view('manage/posts');
+    }
 }

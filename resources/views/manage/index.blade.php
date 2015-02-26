@@ -3,19 +3,30 @@
 @section('content')
     <div id="container" style="border-radius: 0;">
         <div id="manage-container">
-            <div id="manage-sidebar">
-                <div class="ui secondary vertical menu">
-                    <a class="active item">
-                        <i class="users icon"></i>
-                        Friends
-                    </a>
-                    <a class="item">
-                        <i class="mail icon"></i> Messages
-                    </a>
-                    <a class="item">
-                        <i class="user icon"></i> Friends
-                    </a>
-                </div>
+            <div class="ui secondary pointing filter menu">
+                @if (Route::current()->getUri() == 'manage')
+                    <a class="black item active" data-tab="index" href="/manage">概述</a>
+                @else
+                    <a class="black item" data-tab="index" href="/manage">概述</a>
+                @endif
+
+                    @if (Route::current()->getUri() == 'manage/posts')
+                        <a class="red item active" data-tab="posts" href="/manage/posts">文章</a>
+                    @else
+                        <a class="red item" data-tab="posts" href="/manage/posts">文章</a>
+                    @endif
+
+                    @if (Route::current()->getUri() == 'manage/setting')
+                        <a class="green item active" data-tab="setting" href="/manage/setting">配置</a>
+                    @else
+                        <a class="green item" data-tab="setting" href="/manage/setting">配置</a>
+                    @endif
+
+                    @if (Route::current()->getUri() == 'manage/user')
+                        <a class="blue item active" data-tab="user" href="/manage/user">用户</a>
+                    @else
+                        <a class="blue item" data-tab="user" href="/manage/user">用户</a>
+                    @endif
             </div>
             @yield('manage-main')
         </div>
