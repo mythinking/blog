@@ -1,7 +1,8 @@
-@extends('index')
+@extends('manage/index')
 
-@section('content')
-<div id="container">
+@section('manage-main')
+<div id="manage-main">
+    <a class="ui green tiny button" href="/manage/posts">返回列表</a>
     <div id="post-form" class="ui form segment">
         <div class="ui positive message disable">
             <i class="close icon"></i>
@@ -12,14 +13,14 @@
             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
             <div class="required field">
                 <div class="ui labeled input">
-                    <a class="ui label" style="width: 10%">文章标题</a>
+                    <a class="ui label" style="width: 10%;text-align:right">文章标题</a>
                     <input type="text" name="title" id="title" placeholder="typed the title in here">
                 </div>
             </div>
 
             <div class="required field">
                 <div class="ui labeled input">
-                    <a class="ui label" style="width: 10%">标签</a>
+                    <a class="ui label" style="width: 10%;text-align:right">标签</a>
                     <input type="text" name="tag" id="tag" placeholder="多标签用#隔开">
                 </div>
             </div>
@@ -88,13 +89,12 @@
             type:'post',
             success:function(data){
                 if(data >= 1){
-                    var html = '添加文章成功,<a href="/post/'+data+'">点击这里查看</a>';
+                    var html = '添加文章成功,<a href="/post/'+data+'" target="_blank">点击这里查看</a>';
                     $('#post-form .message .header').html(html);
                     $('#post-form .message').removeClass('disable');
                 }
             }
         });
-
     });
 </script>
 @endsection

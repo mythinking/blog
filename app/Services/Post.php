@@ -42,7 +42,7 @@ class Post {
             'post_title' => $data['title'],
             'post_date'  => date('Y-m-d H:i:s'),
             'post_author' => Auth::user()->id,
-            'post_author_name' => Auth::user()->name,
+            //'post_author_name' => Auth::user()->name,
             'post_content' => $data['content'],
             'post_status' => 'publish',
             'comment_status' => isset($data['commentStatus']) && $data['commentStatus'] == 'on' ? 'open' : 'close',
@@ -87,5 +87,25 @@ class Post {
         $postDetail->post_title = trim($postDetail->post_title);
         $postDetail->post_content = trim($postDetail->post_content);
         return $postDetail;
+    }
+
+    public static function count(){
+        return DB::table('posts')->count();
+    }
+
+    public static function listAll($page = 1,$limit = 1){
+        $posts = DB::table('posts')->select('post_id','post_title','post_date','post_status','comment_count','is_page')
+                                    ->orderBy('post_id','desc')
+                                    ->skip(($page-1)*$limit)
+                                    ->take($limit)
+                                    ->get();
+        $data = [];
+        foreach($posts as $key => $post){
+            $data[$key] = $post;
+            $data[$key]->tags = DB::table('terms')->join('term_relationships',function($join)use($post){
+                $join->on('term_relationships.term_id','=','terms.term_id')->where('term_relationships.post_id','=',$post->post_id);
+            })->select('terms.alias','terms.name','terms.term_id','terms.group')->get();
+        }
+        return $data;
     }
 }

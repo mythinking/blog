@@ -10,7 +10,8 @@
                     <a class="black item" data-tab="index" href="/manage">概述</a>
                 @endif
 
-                    @if (Route::current()->getUri() == 'manage/posts')
+                    @if (Route::current()->getUri() == 'manage/posts' 
+                        || Route::current()->getUri() == 'post/create')
                         <a class="red item active" data-tab="posts" href="/manage/posts">文章</a>
                     @else
                         <a class="red item" data-tab="posts" href="/manage/posts">文章</a>

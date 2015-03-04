@@ -27,7 +27,7 @@ class PostController extends Controller {
 	public function create()
 	{
 		//
-        return view('post/create');
+        return view('post.create');
 	}
 
 	/**
@@ -56,7 +56,7 @@ class PostController extends Controller {
 	{
 		//
         $post = Post::show(intval($id));
-        return view('post/show',['post'=>$post]);
+        return view('post.show',['post'=>$post]);
 	}
 
 	/**

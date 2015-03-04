@@ -1,6 +1,6 @@
 @charset "UTF-8";
 * {margin: 0;padding: 0;}
-html,body {height: 100%;background: #f4f4f4;font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif}
+html,body {height: 100%;background: #f4f4f4;font-family: "Helvetica Neue","Microsoft YaHei","Hiragino Sans GB","WenQuanYi Micro Hei",Helvetica,Arial,sans-serif}
 a {text-decoration: none;color: #5d5d5d;}
 a:hover {color: #f4726d;}
 h1 {font-size: 24px;}
