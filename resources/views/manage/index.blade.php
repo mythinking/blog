@@ -11,7 +11,8 @@
                 @endif
 
                     @if (Route::current()->getUri() == 'manage/posts' 
-                        || Route::current()->getUri() == 'post/create')
+                        || Route::current()->getUri() == 'post/create'
+                        || Route::current()->getUri() == 'manage/posts/edit')
                         <a class="red item active" data-tab="posts" href="/manage/posts">文章</a>
                     @else
                         <a class="red item" data-tab="posts" href="/manage/posts">文章</a>

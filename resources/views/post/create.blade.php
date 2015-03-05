@@ -11,22 +11,27 @@
         </div>
         <div id="post-form-content">
             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+            <input type="hidden" name="post_id" id="post_id" value="@if(isset($post->post_id)) {{ $post->post_id }} @endif">
             <div class="required field">
                 <div class="ui labeled input">
                     <a class="ui label" style="width: 10%;text-align:right">文章标题</a>
-                    <input type="text" name="title" id="title" placeholder="typed the title in here">
+                    <input type="text" name="title" id="title" value="@if(isset($post->post_title)) {{ $post->post_title }} @endif" placeholder="typed the title in here">
                 </div>
             </div>
 
             <div class="required field">
                 <div class="ui labeled input">
                     <a class="ui label" style="width: 10%;text-align:right">标签</a>
-                    <input type="text" name="tag" id="tag" placeholder="多标签用#隔开">
+                    <input type="text" name="tag" id="tag" value="@if(isset($post->tags)) {{ $post->tags }} @endif" placeholder="多标签用#隔开">
                 </div>
             </div>
 
             <div class="required field">
-                <textarea name="content" class="textarea" id="content"></textarea>
+                <textarea name="content" class="textarea" id="content">
+                    @if(isset($post->post_content))
+                        {{ $post->post_content }}
+                    @endif
+                </textarea>
             </div>
 
             <div class="field left">
@@ -60,12 +65,13 @@
     });
 
     $('#publish').on('click',function(){
-        var token = $('#token').val();
-        var title = $('#title').val();
-        var tag = $('#tag').val();
-        var content = marked($('#content').val());
-        var commentStats = $('#comment-status').val();
-        var isPage = $('#is-page').val();
+        var postId = $.trim($('#post_id').val());
+        var token = $.trim($('#token').val());
+        var title = $.trim($('#title').val());
+        var tag = $.trim($('#tag').val());
+        var content = $.trim($('#content').val());
+        var commentStats = $.trim($('#comment-status').val());
+        var isPage = $.trim($('#is-page').val());
 
         if(title == ''){
             $('#title').parent().parent().addClass('error');
@@ -77,8 +83,9 @@
         }
 
         $.ajax({
-            url:'/post/store',
+            url:postId == '' ? '/post/store' : '/manage/posts/update',
             data:{
+                "postId":postId,
                 "_token":token,
                 "title":title,
                 "content":content,

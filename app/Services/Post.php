@@ -39,11 +39,11 @@ class Post {
         //添加一篇文章insert into post;获取post_id
         //如果有标签或分类 查询是否已经有该标签或分类,有=>获取term_id,无=>insert into term; 获取term_id
         $line = array(
-            'post_title' => $data['title'],
+            'post_title' => trim($data['title']),
             'post_date'  => date('Y-m-d H:i:s'),
             'post_author' => Auth::user()->id,
             //'post_author_name' => Auth::user()->name,
-            'post_content' => $data['content'],
+            'post_content' => trim($data['content']),
             'post_status' => 'publish',
             'comment_status' => isset($data['commentStatus']) && $data['commentStatus'] == 'on' ? 'open' : 'close',
             'is_page' =>  isset($data['isPage']) && $data['isPage'] == 'on' ?  1 : 0,
@@ -53,23 +53,45 @@ class Post {
         $postId = DB::table('posts')->insertGetId($line);
 
         if(isset($data['tag']) && !empty($data['tag'])){
-            $tags = array_filter(explode('#',$data['tag']));
-            foreach($tags as $tag){
-                $tagId = DB::table('terms')->where('group',1)->where('name',$tag)->pluck('term_id');
-                $termId = $tagId ? $tagId : DB::table('terms')->insertGetId([
-                    'group' => 1,
-                    'name' => $tag,
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s'),
-                ]);
-
-                //post_id与term_id 都有时 insert releationships;
-                if($postId && $termId)
-                    DB::table('term_relationships')->insert(['post_id' => $postId,'term_id' => $termId]);
-            }
+            self::setTags(trim($data['tag']),$postId);
         }
 
         return $postId;
+    }
+
+    public static function setTags($tagString,$postId){
+        $tags = array_filter(explode('#',$tagString));
+        foreach($tags as $tag){
+            $tagId = DB::table('terms')->where('group',1)->where('name',trim($tag))->pluck('term_id');
+            $termId = $tagId > 0 ? $tagId : DB::table('terms')->insertGetId([
+                'group' => 1,
+                'name' => trim($tag),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]);
+
+            $isset = DB::table('term_relationships')->where('post_id',$postId)->where('term_id',$termId)->pluck('post_id');
+            if(!$isset)
+                DB::table('term_relationships')->insert(['post_id' => $postId,'term_id' => $termId]);
+        }
+    }
+
+    public static function update($id,array $data){
+        $line = array(
+            'post_title' => trim($data['title']),
+            'post_content' => trim($data['content']),
+            'comment_status' => isset($data['commentStatus']) && $data['commentStatus'] == 'on' ? 'open' : 'close',
+            'is_page' => isset($data['isPage']) && $data['isPage'] == 'on' ? 1 : 0,
+            'updated_at' => date('Y-m-d H:i:s'),
+        );
+        $res = DB::table('posts')->where('post_id',$id)->update($line);
+
+        if($res && isset($data['tag']) && !empty($data['tag'])){
+            self::setTags(trim($data['tag']),$id);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -107,5 +129,9 @@ class Post {
             })->select('terms.alias','terms.name','terms.term_id','terms.group')->get();
         }
         return $data;
+    }
+
+    public static function delete($id){
+        return DB::table('posts')->where('post_id','=',$id)->delete();
     }
 }

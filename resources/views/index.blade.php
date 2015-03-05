@@ -9,8 +9,8 @@
     <link rel="stylesheet" type="text/css" href="/css/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" href="http://libs.useso.com/js/highlight.js/8.0/styles/googlecode.min.css">
-    <script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://libs.useso.com/js/highlight.js/8.0/highlight.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
     <script src="/js/marked.min.js"></script>
     <script src="/js/semantic.min.js"></script>
     <script src="/js/common.js"></script>

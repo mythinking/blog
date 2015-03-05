@@ -19,7 +19,7 @@ input:focus {border: none;}
 .block {display: block;}
 blockquote {background: #f6f6f6;border-left: 3px solid #f4726d;padding: 10px 15px;margin: 5px 0px;}
 pre code {margin: 5px 0px;padding: 10px 20px;display: inherit;font-size: 12px;line-height: 18px;background: #e6e6e6;font-family: Consolas, "Lucida Console", monospace;}
-p {line-height: 28px}
+p {line-height: 28px;text-indent: 2em;}
 #preview {width: 100%;height: auto;}
 #header {width: 100%;height: 50px;background: #f4726d;position: fixed;top: 0;z-index: 99;line-height: 45px;}
 #nav {margin: 0 auto;width: 80%;}

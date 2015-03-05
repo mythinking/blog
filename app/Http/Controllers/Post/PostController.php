@@ -17,6 +17,24 @@ class PostController extends Controller {
 	public function index()
 	{
 		//
+        //当前页数及limit
+        $page = intval(Input::get('page',1));
+        $limit = Input::get('limit',10);
+
+        $posts = Post::listAll($page,$limit);
+        $count = Post::count();
+
+        //页数
+        $pageCount = ceil($count/$limit);
+
+        //分页参数
+        $pager = [
+            'page' => $page,
+            'count' => $pageCount,
+            'prev' => ($page > 1) ? ($page - 1) : '',
+            'next' => ($page < $pageCount) ? ($page + 1) : '',
+        ];
+        return view('manage.posts',['posts' => $posts,'pager' => $pager]);
 	}
 
 	/**
@@ -37,7 +55,6 @@ class PostController extends Controller {
 	 */
 	public function store()
 	{
-		//
         $postId = null;
         $input = Input::get();
         if(Post::validator($input)){
@@ -56,7 +73,7 @@ class PostController extends Controller {
 	{
 		//
         $post = Post::show(intval($id));
-        return view('post.show',['post'=>$post]);
+        return view('post.show',['post' => $post]);
 	}
 
 	/**
@@ -65,9 +82,16 @@ class PostController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit()
 	{
-		//
+		$id = intval(Input::get('id',0));
+        $post = Post::show($id);
+        $tagString = '';
+        foreach($post->tags as $tag){
+            $tagString .= "#".$tag;
+        }
+        $post->tags = $tagString;
+        return view('post.create',['post' => $post]);
 	}
 
 	/**
@@ -76,20 +100,29 @@ class PostController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		$input = Input::get();
+        $id = intval($input['postId']);
+
+        if(Post::validator($input)){
+            $res = Post::update($id,$input);
+        }
+
+        echo $res ? 1 : -1;
 	}
 
 	/**
 	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy()
 	{
-		//
+        $id = intval(Input::get('id',0));
+        if($id == 0)
+            return ;
+
+        echo Post::delete($id) ? 1 : -1;
 	}
 
 }

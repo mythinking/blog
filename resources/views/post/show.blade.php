@@ -26,6 +26,11 @@
     </div>
 </div>
 <script type="text/javascript">
+    $('document').ready(function(){
+        var html = marked($('.post-content').html());
+        $('.post-content').html(html);
+    });
+
     $('#container .viewer').on('click','.wide',function(){
         $('#container').css({width:'80%'});
     });

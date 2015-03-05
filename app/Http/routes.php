@@ -25,6 +25,12 @@ Route::get('post/create',['middleware' => 'contributor','uses' => 'Post\PostCont
 Route::post('post/store',['middleware' => 'contributor','uses' => 'Post\PostController@store']);
 
 Route::get('manage',['middleware' => 'administrator','uses' => 'Manage\ManageController@index']);
-Route::get('manage/setting',['middleware' => 'administrator','uses' => 'Manage\ManageController@setting']);
-Route::get('manage/posts',['middleware' => 'administrator','uses' => 'Manage\ManageController@posts']);
-Route::get('manage/user',['middleware' => 'administrator','uses' => 'Manage\ManageController@user']);
+
+Route::get('manage/setting',['middleware' => 'administrator','uses' => 'Manage\SettingController@lists']);
+
+Route::get('manage/posts',['middleware' => 'administrator','uses' => 'Post\PostController@index']);
+Route::get('manage/posts/delete',['middleware' => 'administrator','uses' => 'Post\PostController@destroy']);
+Route::get('manage/posts/edit',['middleware' => 'administrator','uses' => 'Post\PostController@edit']);
+Route::post('manage/posts/update',['middleware' => 'administrator','uses' => 'Post\PostController@update']);
+
+Route::get('manage/user',['middleware' => 'administrator','uses' => 'Manage\UserController@lists']);

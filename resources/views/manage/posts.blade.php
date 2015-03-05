@@ -19,7 +19,7 @@
             </thead>
             <tbody>
             @foreach($posts as $line)
-                <tr>
+                <tr id="tr-{{ $line->post_id }}">
                     <td>{{ $line->post_id }}</td>
                     <td><a href="/post/{{ $line->post_id }}" target="_blank">{{ $line->post_title }}</a></td>
                     <td>{{ $line->post_date }}</td>
@@ -43,8 +43,8 @@
                         </label>
                     </td>
                     <td>
-                        <button class="ui button blue tiny">编 辑</button>
-                        <button class="ui button red tiny">删 除</button>
+                        <a class="ui button blue tiny update" href="/manage/posts/edit?id={{ $line->post_id }}">编 辑</a>
+                        <button class="ui button red tiny delete" data-post-id="{{ $line->post_id }}">删 除</button>
                     </td>
                 </tr>
             @endforeach
@@ -59,4 +59,24 @@
             <a class="ui tiny basic button" href="/manage/posts?page={{ $pager['next'] }}">下一页</a>
         @endif
     </div>
+    <script type="text/javascript">
+        //删除
+        $('.delete').click(function(){
+            var obj = $(this);
+            var postId = obj.attr('data-post-id');
+
+            $.ajax({
+                type:'get',
+                url:'/manage/posts/delete?id='+postId,
+                success: function (data) {
+                    if(data == 1){
+                        alert('删除成功啦^_^');
+                        $('#tr-'+postId).remove();
+                    }else{
+                        alert('删除失败T_T');
+                    }
+                }
+            });
+        });
+    </script>
 @endsection
