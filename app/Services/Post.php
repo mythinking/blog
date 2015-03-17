@@ -116,7 +116,7 @@ class Post {
     }
 
     public static function listAll($page = 1,$limit = 1){
-        $posts = DB::table('posts')->select('post_id','post_title','post_date','post_status','comment_count','is_page')
+        $posts = DB::table('posts')->select('*')
                                     ->orderBy('post_id','desc')
                                     ->skip(($page-1)*$limit)
                                     ->take($limit)
