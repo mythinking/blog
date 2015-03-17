@@ -24,7 +24,7 @@
 <div id="header">
     <div id="nav">
         <div id="menu" class="left">
-            <a href="/" style="font-size: 25px;text-decoration: none;color: #ffffff">Laravel</a>
+            <a href="/" style="font-size: 25px;text-decoration: none;color: #ffffff">Schaffer Blog</a>
         </div>
 
         <div id="profile" class="right">
