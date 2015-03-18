@@ -27,11 +27,8 @@
             </div>
 
             <div class="required field">
-                <textarea name="content" class="textarea" id="content">
-                    @if(isset($post->post_content))
-                        {{ $post->post_content }}
-                    @endif
-                </textarea>
+                <!--不能有回车，不然会出现多余的空格-->
+                <textarea name="content" class="textarea" id="content">@if(isset($post->post_content)) {{ $post->post_content }} @endif</textarea>
             </div>
 
             <div class="field left">

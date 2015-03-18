@@ -19,8 +19,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="post-content">
-                <?php echo $post->post_content; ?>
+            <div class="post-content"><?php echo $post->post_content; ?>
             </div>
         </div>
     </div>
