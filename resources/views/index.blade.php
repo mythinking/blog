@@ -48,7 +48,6 @@
 @yield('content')
 <div id="footer" class="text-center">
     <span class="copyright">&copy; 2014 Laravel-blog</span>
-    &nbsp;&nbsp; <a href="/doc/index.html">API</a>
 </div>
 </body>
 </html>

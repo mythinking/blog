@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use App\Services\Post;
+use Illuminate\Support\Facades\Input;
+
 class HomeController extends Controller {
 
 	/*
@@ -30,7 +33,21 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home');
+        $page = intval(Input::get('page',1));
+        $limit = intval(Input::get('limit',3));
+
+        $posts = Post::listAll($page,$limit);
+        $count = Post::count();
+
+        $pageCount = ceil($count/$limit);
+
+        $pager = [
+            'page' => $page,
+            'count' => $pageCount,
+            'prev' => ($page > 1) ? ($page - 1) : '',
+            'next' => ($page < $pageCount) ? ($page + 1) : '',
+        ];
+		return view('home',['posts' => $posts,'pager' => $pager]);
 	}
 
 }

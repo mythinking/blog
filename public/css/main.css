@@ -26,7 +26,8 @@ p {line-height: 28px;text-indent: 2em;}
 #nav #profile ul {list-style-type: none;}
 #nav #profile ul li {float: left;margin: 0 2px 0 8px}
 #nav #profile ul li,#nav #profile ul li a {font-size: 13px;line-height: 50px;color: #ffffff;}
-#container {margin: 0 auto;border: 1px solid #e6e6e6;border-radius: 5px;width: 80%;background: #ffffff; position: relative;top: 60px;line-height: 28px;}
+#container {margin: 0 auto;border: 1px solid #e6e6e6;border-radius: 5px;width: 65%;background: #ffffff; position: relative;top: 60px;line-height: 28px;}
+#container.manage {width: 80%;}
 #register {margin: 10% auto;width: 40%;}
 #post-list {padding: 0 30px;}
 #container #post-form .field textarea.textarea {height: 800px;font-family: monospace,monospace}
@@ -101,6 +102,15 @@ p {line-height: 28px;text-indent: 2em;}
         width: 100%;
     }
     #container .viewer {
+        display: none;
+    }
+}
+@media (max-width: 400px) {
+    #nav #menu {
+        text-align: center;
+        float: none;
+    }
+    #nav #profile {
         display: none;
     }
 }

@@ -1,16 +1,17 @@
 @extends('index')
 
 @section('content')
-    <div id="container" style="border-radius: 0;">
+    <div id="container" class="manage" style="border-radius: 0;">
         <div id="manage-container">
             <div class="ui secondary pointing filter menu">
-                @if (Route::current()->getUri() == 'manage')
+                {{--@if (Route::current()->getUri() == 'manage')
                     <a class="black item active" data-tab="index" href="/manage">概述</a>
                 @else
                     <a class="black item" data-tab="index" href="/manage">概述</a>
-                @endif
+                @endif--}}
 
-                    @if (Route::current()->getUri() == 'manage/posts' 
+                    @if (Route::current()->getUri() == 'manage'
+                        || Route::current()->getUri() == 'manage/posts'
                         || Route::current()->getUri() == 'post/create'
                         || Route::current()->getUri() == 'manage/posts/edit')
                         <a class="red item active" data-tab="posts" href="/manage/posts">文章</a>

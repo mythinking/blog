@@ -24,7 +24,8 @@ Route::get('post/{id}','Post\PostController@show')->where('id','[0-9]+');
 Route::get('post/create',['middleware' => 'contributor','uses' => 'Post\PostController@create']);
 Route::post('post/store',['middleware' => 'contributor','uses' => 'Post\PostController@store']);
 
-Route::get('manage',['middleware' => 'administrator','uses' => 'Manage\ManageController@index']);
+//Route::get('manage',['middleware' => 'administrator','uses' => 'Manage\ManageController@index']);
+Route::get('manage',['middleware' => 'administrator','uses' => 'Post\PostController@index']);
 
 Route::get('manage/setting',['middleware' => 'administrator','uses' => 'Manage\SettingController@lists']);
 
