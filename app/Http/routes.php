@@ -14,6 +14,7 @@
 Route::get('/', 'HomeController@index');
 
 Route::get('home', 'HomeController@index');
+Route::get('category/date/{date}','Post\CategoryController@date');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

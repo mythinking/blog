@@ -131,6 +131,17 @@ class Post {
         return $data;
     }
 
+    public static function getDateCategory($date, $page = 1, $limit = 10){
+        $posts = DB::table('posts')->select('post_id','post_title','post_date')
+            ->whereRaw("left(post_date,7) = '{$date}'")
+            ->orderBy('post_date','desc')
+            ->skip(($page-1)*$limit)
+            ->take($limit)
+            ->get();
+        $count = DB::table('posts')->whereRaw("left(post_date,7) = '{$date}'")->count();
+        return ['count' => $count,'posts' => $posts];
+    }
+
     public static function delete($id){
         return DB::table('posts')->where('post_id','=',$id)->delete();
     }
