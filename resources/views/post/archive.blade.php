@@ -15,11 +15,11 @@
         <div class="pager text-center">
             <!--上一页-->
             @if(!empty($pager['prev']))
-                <a class="ui tiny basic button " href="/category/date/{{ $date }}?page={{ $pager['prev'] }}">上一页</a>
+                <a class="ui tiny basic button " href="/archive/{{ $view }}/{{ $key }}/{{ $pager['prev'] }}">上一页</a>
                 @endif
                         <!--下一页-->
                 @if(!empty($pager['next']))
-                    <a class="ui tiny basic button" href="/category/date/{{ $date }}?page={{ $pager['next'] }}">下一页</a>
+                    <a class="ui tiny basic button" href="/archive/{{ $view }}/{{ $key }}/{{ $pager['next'] }}">下一页</a>
                 @endif
         </div>
     </div>

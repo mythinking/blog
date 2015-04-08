@@ -8,10 +8,12 @@
 namespace App\Http\Controllers\Manage;
 
 use App\Http\Controllers\Controller;
+use App\User;
 
 class UserController extends Controller{
 
     public function lists(){
-        return view('manage.user');
+        $res = User::all();
+        return view('manage.user',['user' => $res]);
     }
 }

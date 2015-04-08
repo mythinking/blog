@@ -7,11 +7,15 @@ use Validator;
 
 /**
  * 文章操作服务
- * @author 温旭峰
  * @version 1.0
  */
 class Post {
 
+    /**
+     * 验证
+     * @param array $data
+     * @return mixed
+     */
     public static function validator(array $data){
         return Validator::make($data,[
             'title' => 'required|max:255',
@@ -21,16 +25,6 @@ class Post {
 
     /**
      * 添加文章，返回新增文章ID
-     *
-     * [php]
-     * $data = [
-     *     'title' => '文章标题',
-     *     'content' => '文章内容',
-     *     'commentStatus' => 'on',
-     *     'isPage' => 'on',
-     * ]
-     * $postId = Post::create($data);
-     *
      * @param array $data 文章数据
      * @return integer postId 新增文章的ID
      * @version 1.0
@@ -59,6 +53,11 @@ class Post {
         return $postId;
     }
 
+    /**
+     * 设置文章标签
+     * @param $tagString
+     * @param $postId
+     */
     public static function setTags($tagString,$postId){
         $tags = array_filter(explode('#',$tagString));
         foreach($tags as $tag){
@@ -76,6 +75,12 @@ class Post {
         }
     }
 
+    /**
+     * 更新文章数据
+     * @param $id
+     * @param array $data
+     * @return bool
+     */
     public static function update($id,array $data){
         $line = array(
             'post_title' => trim($data['title']),
@@ -111,10 +116,20 @@ class Post {
         return $postDetail;
     }
 
+    /**
+     * 获取文章总数
+     * @return mixed
+     */
     public static function count(){
         return DB::table('posts')->count();
     }
 
+    /**
+     * 查询所有文章
+     * @param int $page
+     * @param int $limit
+     * @return array
+     */
     public static function listAll($page = 1,$limit = 1){
         $posts = DB::table('posts')->select('*')
                                     ->orderBy('post_id','desc')
@@ -131,17 +146,40 @@ class Post {
         return $data;
     }
 
-    public static function getDateCategory($date, $page = 1, $limit = 10){
+    /**
+     * 获取特定月份的文章归档数
+     * @param $date
+     * @param int $page
+     * @param int $limit
+     * @return array
+     */
+    public static function getDateArchive($date, $page = 1, $limit = 20){
         $posts = DB::table('posts')->select('post_id','post_title','post_date')
-            ->whereRaw("left(post_date,7) = '{$date}'")
-            ->orderBy('post_date','desc')
-            ->skip(($page-1)*$limit)
-            ->take($limit)
-            ->get();
+            ->whereRaw("left(post_date,7) = '{$date}'")->orderBy('post_date','desc')->skip(($page-1)*$limit)->take($limit)->get();
         $count = DB::table('posts')->whereRaw("left(post_date,7) = '{$date}'")->count();
         return ['count' => $count,'posts' => $posts];
     }
 
+    /**
+     * 获取标签分类归档
+     * @param $tagId
+     * @param int $page
+     * @param int $limit
+     * @return array
+     */
+    public static function getTagsArchive($tagId, $page = 1, $limit = 20){
+        $posts = DB::table('posts')->join('term_relationships',function($join)use($tagId){
+            $join->on('term_relationships.post_id','=','posts.post_id')->where('term_id','=',intval($tagId));
+        })->select('posts.post_id','post_title','post_date')->orderBy('posts.post_id','desc')->skip(($page - 1)*$limit)->take($limit)->get();
+        $count = DB::table('term_relationships')->where('term_id','=',intval($tagId))->count();
+        return ['count' => $count,'posts' => $posts];
+    }
+
+    /**
+     * 删除文章
+     * @param $id
+     * @return mixed
+     */
     public static function delete($id){
         return DB::table('posts')->where('post_id','=',$id)->delete();
     }

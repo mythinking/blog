@@ -31,11 +31,7 @@ class HomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
-        $page = intval(Input::get('page',1));
-        $limit = intval(Input::get('limit',1));
-
+	public function index($page = 1, $limit = 20){
         $posts = Post::listAll($page,$limit);
         $count = Post::count();
 

@@ -14,12 +14,7 @@ class PostController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
-		//
-        //当前页数及limit
-        $page = intval(Input::get('page',1));
-        $limit = Input::get('limit',10);
+	public function index($page = 1,$limit = 20){
 
         $posts = Post::listAll($page,$limit);
         $count = Post::count();
@@ -82,10 +77,9 @@ class PostController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit()
+	public function edit($id)
 	{
-		$id = intval(Input::get('id',0));
-        $post = Post::show($id);
+        $post = Post::show(intval($id));
         $tagString = '';
         foreach($post->tags as $tag){
             $tagString .= "#".$tag;
@@ -109,7 +103,7 @@ class PostController extends Controller {
             $res = Post::update($id,$input);
         }
 
-        echo $res ? 1 : -1;
+        echo $res ? $id : -1;
 	}
 
 	/**

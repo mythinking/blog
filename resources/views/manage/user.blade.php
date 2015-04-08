@@ -2,6 +2,6 @@
 
 @section('manage-main')
     <div id="manage-main">
-        this is manage main blade User!
+        <?php var_dump($user);?>
     </div>
 @endsection

@@ -43,21 +43,23 @@
                         </label>
                     </td>
                     <td>
-                        <a class="ui button blue tiny update" href="/manage/posts/edit?id={{ $line->post_id }}">编 辑</a>
+                        <a class="ui button blue tiny update" href="/manage/posts/edit/{{ $line->post_id }}">编 辑</a>
                         <button class="ui button red tiny delete" data-post-id="{{ $line->post_id }}">删 除</button>
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
-        <!--上一页-->
-        @if(!empty($pager['prev']))
-            <a class="ui tiny basic button" href="/manage/posts?page={{ $pager['prev'] }}">上一页</a>
-        @endif
-        <!--下一页-->
-        @if(!empty($pager['next']))
-            <a class="ui tiny basic button" href="/manage/posts?page={{ $pager['next'] }}">下一页</a>
-        @endif
+        <div class="pager text-center">
+            <!--上一页-->
+            @if(!empty($pager['prev']))
+                <a class="ui tiny basic button" href="/manage/posts/{{ $pager['prev'] }}">上一页</a>
+            @endif
+            <!--下一页-->
+            @if(!empty($pager['next']))
+                <a class="ui tiny basic button" href="/manage/posts/{{ $pager['next'] }}">下一页</a>
+            @endif
+        </div>
     </div>
     <script type="text/javascript">
         //删除

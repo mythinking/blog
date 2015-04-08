@@ -22,9 +22,13 @@ class RouteServiceProvider extends ServiceProvider {
 	 */
 	public function boot(Router $router)
 	{
+        //自定义参数格式
+        $router->patterns([
+            'id' => '[0-9]+',
+            'page' => '[0-9]+',
+            'limit' => '[0-9]+',
+        ]);
 		parent::boot($router);
-
-		//
 	}
 
 	/**

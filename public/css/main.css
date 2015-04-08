@@ -32,89 +32,27 @@ p {line-height: 28px;text-indent: 2em;}
 #post-list {padding: 0 30px;}
 #container #post-form .field textarea.textarea {height: 800px;font-family: monospace,monospace}
 .post-header {margin: 20px 0 10px;border-bottom: 1px solid #e6e6e6;}
-.post-header .post-tag {
-    width: 100%;
-    height: 30px;
-    font-size: 12px;
-    line-height: 30px;
-}
-.post-header .post-date {
-    position: absolute;
-    right: 35px;
-    font-size: 12px;
-}
-.post-content {
-    color: #5e5e5e;
-    font-size: 14px;
-    margin-bottom: 20px;
-}
-.post-content code {
-    background: #f6f6f6;
-    display: inline-block;
-}
-.post-content pre code {
-    display: block;
-}
-.post-content a {
-    color: #5699bb;
-}
-#footer {
-    margin: 100px;
-}
-#fixed-right-tools .background-icon {
-    background-size: 70px 70px;
-    width: 70px;
-    height: 70px;
-    cursor: pointer;
-    position: fixed;
-    right: 20px;
-}
-#new-post {
-    z-index: 100;
-    bottom: 20px;
-    background: url('../img/new-post.png') no-repeat;
-}
-#container .pager {
-    width: 100%;
-    margin: 20px auto;
-}
+.post-header .post-tag {width: 100%;height: 30px;font-size: 12px;line-height: 30px;}
+.post-header .post-date {position: absolute;right: 35px;font-size: 12px;}
+.post-content {color: #5e5e5e;font-size: 14px;margin-bottom: 20px;}
+.post-content code {background: #f6f6f6;display: inline-block;}
+.post-content pre code {display: block;}
+.post-content a {color: #5699bb;}
+#footer {margin: 90px 0px 40px;}
+#fixed-right-tools .background-icon {background-size: 70px 70px;width: 70px;height: 70px;cursor: pointer;position: fixed;right: 20px;}
+#new-post {z-index: 100;bottom: 20px;background: url('../img/new-post.png') no-repeat;}
+#container .pager {width: 100%;margin: 20px auto;}
 
-
-/**
- * manage
- */
-#manage-container {
-    margin: 20px;
-}
-#manage-sidebar {
-    width: 20%;
-}
+#manage-container {margin: 20px;  }
 
 @media (max-width:768px ) {
-    #container {
-        width: 100%;
-        border-radius: 0;
-        top: 50px;
-    }
-    #fixed-right-tools .background-icon {
-        width: 60px;
-        height: 60px;
-        background-size: 60px 60px;
-    }
-    #register {
-        margin: 40% auto;
-        width: 100%;
-    }
-    #container .viewer {
-        display: none;
-    }
+    #container {width: 100%;border-radius: 0;top: 50px;}
+    #fixed-right-tools .background-icon {width: 60px;height: 60px;background-size: 60px 60px;  }
+    #register {margin: 40% auto;width: 100%;  }
+    #container .viewer {display: none;}
+    #container.manage {width: 100%}
 }
 @media (max-width: 400px) {
-    #nav #menu {
-        text-align: center;
-        float: none;
-    }
-    #nav #profile {
-        display: none;
-    }
+    #nav #menu {text-align: center;float: none;}
+    #nav #profile {display: none;}
 }
