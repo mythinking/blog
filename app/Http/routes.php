@@ -16,9 +16,9 @@ Route::get('/{page?}/{limit?}', 'HomeController@index');
 Route::get('home/{page?}/{limit?}', 'HomeController@index');
 
 //article归档分类
-Route::group(['prefix' => 'archive'],function(){
-    Route::get('/date/{date}/{page?}/{limit?}','Post\ArchiveController@date');
-    Route::get('/tags/{id}/{page?}/{limit?}','Post\ArchiveController@tags');
+Route::group(['prefix' => 'archive','namespace' => 'Post'],function(){
+    Route::get('/date/{date}/{page?}/{limit?}','ArchiveController@date');
+    Route::get('/tags/{id}/{page?}/{limit?}','ArchiveController@tags');
 });
 
 //用户登录认证相关
@@ -28,12 +28,12 @@ Route::controllers([
 ]);
 
 //article操作
-Route::group(['prefix' => 'post'],function(){
-    Route::get('/{id}','Post\PostController@show');             //展示
+Route::group(['prefix' => 'post','namespace' => 'Post'],function(){
+    Route::get('/{id}','PostController@show');             //展示
 
     Route::group(['middleware' => 'contributor'],function(){    //创建，需要撰稿人才可以操作
-        Route::get('/create','Post\PostController@create');
-        Route::post('/store','Post\PostController@store');
+        Route::get('/create','PostController@create');
+        Route::post('/store','PostController@store');
     });
 });
 
@@ -42,18 +42,18 @@ Route::group(['prefix' => 'post'],function(){
 Route::group(['middleware' => 'administrator','prefix' => 'manage'],function(){
     Route::get('/', 'Post\PostController@index');                       //后台首页
 
-    Route::group(['prefix' => 'setting'],function(){                    //设置操作
-        Route::get('/', 'Manage\SettingController@lists');
+    Route::group(['prefix' => 'setting','namespace' => 'Manage'],function(){                    //设置操作
+        Route::get('/', 'SettingController@lists');
     });
 
-    Route::group(['prefix' => 'posts'],function(){                      //文章操作，增删改查
-        Route::get('/{page?}/{limit?}', 'Post\PostController@index');
-        Route::get('/edit/{id}', 'Post\PostController@edit');
-        Route::get('/delete', 'Post\PostController@destroy');
-        Route::post('/update', 'Post\PostController@update');
+    Route::group(['prefix' => 'posts','namespace' => 'Post'],function(){                      //文章操作，增删改查
+        Route::get('/{page?}/{limit?}', 'PostController@index');
+        Route::get('/edit/{id}', 'PostController@edit');
+        Route::get('/delete', 'PostController@destroy');
+        Route::post('/update', 'PostController@update');
     });
 
-    Route::group(['prefix' => 'user'],function(){                       //用户管理
-        Route::get('/', 'Manage\UserController@lists');
+    Route::group(['prefix' => 'user','namespace' => 'Manage'],function(){                       //用户管理
+        Route::get('/', 'UserController@lists');
     });
 });
